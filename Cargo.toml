@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "nix-wasi-builder-hello",
+]
+resolver = "2"
+
+[profile.release]
+lto = true
+opt-level = 's'

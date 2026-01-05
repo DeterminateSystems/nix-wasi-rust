@@ -1,0 +1,8 @@
+[package]
+name = "nix-wasi-builder-hello"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "nix-wasi-builder-hello"
+path = "src/main.rs"

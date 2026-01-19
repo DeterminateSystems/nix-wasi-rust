@@ -81,6 +81,7 @@
           pkgs.runCommand "nix-wasi-rust-test-${system}"
           {
             buildInputs = [ inputs.nix.packages.${system}.nix ];
+            NIX_CONFIG = "extra-experimental-features = wasm-derivations";
           }
           ''
             path=$(nix build --print-out-paths -L --store $TMPDIR/nix --impure --offline --expr 'derivation {

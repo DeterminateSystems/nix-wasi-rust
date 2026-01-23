@@ -87,6 +87,8 @@
               name = "nix-wasi-builder-hello-test";
               system = "wasm32-wasip1";
               builder = ${self.packages.${system}.default}/bin/nix-wasi-builder-hello.wasm;
+              passAsFile = [ "greeting" ];
+              greeting = "Hello";
               args = [ "World!" ];
             }')
             [[ $(nix store cat --store $TMPDIR/nix $path) = "Hello World!" ]]

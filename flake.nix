@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.follows = "nix/nixpkgs";
     flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*.tar.gz";
-    nix.url = "github:DeterminateSystems/nix-src/wasm";
+    nix.url = "github:DeterminateSystems/nix-src";
     fenix = {
       url = "https://flakehub.com/f/nix-community/fenix/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -83,10 +83,12 @@
             buildInputs = [ inputs.nix.packages.${system}.nix ];
           }
           ''
-            path=$(nix build --print-out-paths -L --store $TMPDIR/nix --impure --offline --expr 'derivation {
+            path=$(nix build --extra-experimental-features wasm-derivations --print-out-paths -L --store $TMPDIR/nix --impure --offline --expr 'derivation {
               name = "nix-wasi-builder-hello-test";
               system = "wasm32-wasip1";
               builder = ${self.packages.${system}.default}/bin/nix-wasi-builder-hello.wasm;
+              passAsFile = [ "greeting" ];
+              greeting = "Hello";
               args = [ "World!" ];
             }')
             [[ $(nix store cat --store $TMPDIR/nix $path) = "Hello World!" ]]

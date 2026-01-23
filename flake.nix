@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.follows = "nix/nixpkgs";
     flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*.tar.gz";
-    nix.url = "github:DeterminateSystems/nix-src/wasm";
+    nix.url = "github:DeterminateSystems/nix-src";
     fenix = {
       url = "https://flakehub.com/f/nix-community/fenix/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";

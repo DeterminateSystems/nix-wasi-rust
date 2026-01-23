@@ -83,7 +83,7 @@
             buildInputs = [ inputs.nix.packages.${system}.nix ];
           }
           ''
-            path=$(nix build --print-out-paths -L --store $TMPDIR/nix --impure --offline --expr 'derivation {
+            path=$(nix build --extra-experimental-features wasm-derivations --print-out-paths -L --store $TMPDIR/nix --impure --offline --expr 'derivation {
               name = "nix-wasi-builder-hello-test";
               system = "wasm32-wasip1";
               builder = ${self.packages.${system}.default}/bin/nix-wasi-builder-hello.wasm;
